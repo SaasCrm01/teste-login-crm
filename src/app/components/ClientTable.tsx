@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 type Client = {
   id: number;
   name: string;
@@ -32,7 +34,11 @@ export default function ClientTable({ clients }: ClientTableProps) {
         {clients.map((client) => (
           <tr key={client.id}>
             <td>{client.id}</td>
-            <td>{client.name}</td>
+            <td>
+              <Link href={`/clients/${client.id}`} legacyBehavior>
+                <a>{client.name}</a>
+              </Link>
+            </td>
             <td>{client.email}</td>
             <td>{client.phone}</td>
           </tr>
