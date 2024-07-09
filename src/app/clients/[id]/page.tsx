@@ -1,7 +1,6 @@
-// src/app/clients/[id]/page.tsx
 "use client";
 
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
 const fetcher = async (url: string) => {
@@ -13,14 +12,14 @@ const fetcher = async (url: string) => {
 };
 
 const ClientDetails = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams ? searchParams.get('id') : null;
-  console.log("Client ID:", id); // Adicione este log para depuração
+  const params = useParams();
+  const id = params?.id;
+  console.log("Client ID:", id); // Log para depuração
 
   const { data, error } = useSWR(id ? `/api/clients/${id}` : null, fetcher);
 
-  console.log("Data:", data); // Adicione este log para depuração
-  console.log("Error:", error); // Adicione este log para depuração
+  console.log("Data:", data); // Log para depuração
+  console.log("Error:", error); // Log para depuração
 
   if (error) return <div>Falha ao carregar os dados do cliente.</div>;
   if (!data) return <div>Carregando...</div>;
