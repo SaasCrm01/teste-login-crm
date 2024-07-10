@@ -1,7 +1,9 @@
-"use client";
+// src/app/clients/[id]/page.tsx
+'use client';
 
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const fetcher = async (url: string) => {
   const response = await fetch(url);
@@ -14,22 +16,32 @@ const fetcher = async (url: string) => {
 const ClientDetails = () => {
   const params = useParams();
   const id = params?.id;
-  console.log("Client ID:", id); // Log para depuração
+  console.log("Client ID:", id);
 
   const { data, error } = useSWR(id ? `/api/clients/${id}` : null, fetcher);
-
-  console.log("Data:", data); // Log para depuração
-  console.log("Error:", error); // Log para depuração
 
   if (error) return <div>Falha ao carregar os dados do cliente.</div>;
   if (!data) return <div>Carregando...</div>;
 
   return (
-    <div>
-      <h1>{data.name}</h1>
-      <p>Email: {data.email}</p>
-      <p>Telefone: {data.phone}</p>
-      {/* Adicione mais detalhes conforme necessário */}
+    <div className="container mt-5">
+      <h1>Detalhes do Cliente</h1>
+      <table className="table table-responsive table-striped">
+        <tbody>
+          <tr>
+            <th>Nome</th>
+            <td>{data.name}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{data.email}</td>
+          </tr>
+          <tr>
+            <th>Telefone</th>
+            <td>{data.phone}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

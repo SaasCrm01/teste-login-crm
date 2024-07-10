@@ -1,10 +1,7 @@
-// src/app/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from './components/Navbar';
 import './globals.css';
-import './layout.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,31 +12,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
-        {/* Adiciona o CSS do Bootstrap */}
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-          crossOrigin="anonymous"
-        />
+        {/* Outros meta dados e links */}
       </head>
       <body className={inter.className}>
         <div className="d-flex">
           <Navbar />
-          <main className="flex-grow-1 p-4 main-content">{children}</main>
+          <main className="flex-grow-1 p-4">{children}</main>
         </div>
-        {/* Adiciona o JavaScript do Bootstrap */}
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-          crossOrigin="anonymous"
-        ></script>
       </body>
     </html>
   );

@@ -66,11 +66,11 @@ export default function RegisterClient() {
   };
 
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4">Register Client</h1>
+    <div className="container mt-5 bg-slate-200">
+      <h1 className="mb-5 pt-4">Registre um Cliente</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name</label>
+          <label htmlFor="name" className="form-label">Nome</label>
           <input 
             type="text" 
             className="form-control" 
@@ -82,7 +82,7 @@ export default function RegisterClient() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email</label>
+          <label htmlFor="email" className="form-label">E-mail</label>
           <input 
             type="email" 
             className="form-control" 
@@ -94,7 +94,7 @@ export default function RegisterClient() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="phone" className="form-label">Phone</label>
+          <label htmlFor="phone" className="form-label">Contato</label>
           <input 
             type="text" 
             className="form-control" 
@@ -104,9 +104,11 @@ export default function RegisterClient() {
             onChange={handleChange} 
           />
         </div>
-        <button type="submit" className="btn btn-primary">Register Client</button>
+        <button type="submit" className="btn btn-primary">Registrar</button>
       </form>
+      <div className="pt-3 pb-3 ">
       <ClientTable clients={clients} />
+      </div>
     </div>
   );
 }

@@ -1,42 +1,26 @@
-// src/app/components/Navbar.tsx
-'use client';
-
-import Link from 'next/link';
 import React from 'react';
-import './Navbar.css'; // Importa o CSS da navbar
+import Link from 'next/link';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Navbar() {
+const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light flex-column vh-100 position-fixed">
-      <div className="container-fluid d-flex flex-column">
-        <Link href="/" legacyBehavior>
-          <a className="navbar-brand text-blue-500 hover:text-blue-700">Crm 01</a>
-        </Link>
-        <div className="collapse navbar-collapse show">
-          <ul className="navbar-nav flex-column">
-            <li className="nav-item">
-              <Link href="/register-client" legacyBehavior>
-                <a className="nav-link text-blue-500 hover:text-blue-700">Cadastrar Cliente</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/register-seller" legacyBehavior>
-                <a className="nav-link text-blue-500 hover:text-blue-700">Cadastrar Vendedor</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/clients" legacyBehavior>
-                <a className="nav-link text-blue-500 hover:text-blue-700">Clientes</a>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/sellers" legacyBehavior>
-                <a className="nav-link text-blue-500 hover:text-blue-700">Vendedores</a>
-              </Link>
-            </li>
-          </ul>
-        </div>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light flex-column vh-100">
+      <a className="navbar-brand mb-4" href="#">Crm 01</a>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse show" id="navbarNav">
+        <ul className="navbar-nav flex-column">
+          <li className="nav-item">
+            <Link className="nav-link" href="/register-client">Register Client</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" href="/client-list">Client List</Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

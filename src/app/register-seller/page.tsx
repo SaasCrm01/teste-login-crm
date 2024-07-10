@@ -1,3 +1,4 @@
+// src/app/register-seller/page.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -27,14 +28,9 @@ export default function RegisterSeller() {
     try {
       const response = await fetch('/api/sellers');
       const data = await response.json();
-      if (Array.isArray(data)) {
-        setSellers(data);
-      } else {
-        setSellers([]);
-      }
+      setSellers(data);
     } catch (error) {
       console.error('Failed to fetch sellers:', error);
-      setSellers([]);
     }
   };
 

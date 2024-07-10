@@ -21,7 +21,7 @@ export default function ClientTable({ clients }: ClientTableProps) {
   }
 
   return (
-    <table className="table table-striped mt-4">
+    <table className="table table-striped mt-4 rounded-full" >
       <thead>
         <tr>
           <th>ID</th>
