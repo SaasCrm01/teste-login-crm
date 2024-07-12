@@ -11,15 +11,4 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.d-flex {
-  display: flex;
-}
 
-.navbar {
-  min-width: 200px;
-}
-
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
-}
