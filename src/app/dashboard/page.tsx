@@ -33,7 +33,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="container mt-5">
+    <div className=" container mt-5">
       <h1 className="mb-4">Dashboard</h1>
       <div className="row">
         <div className="col-md-6">

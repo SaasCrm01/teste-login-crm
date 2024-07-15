@@ -2,35 +2,108 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { FaTachometerAlt, FaUser, FaClipboardList, FaBell, FaHeart, FaWallet, FaMoon, FaSun, FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
   const pathname = usePathname();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Check if the current path is the home page
-  const isHome = pathname === '/';
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
-  if (isHome) return null;
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(true); // Menu aberto no desktop
+      } else {
+        setIsMenuOpen(false); // Menu fechado no modo responsivo
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Chamada inicial
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.navbar') && !target.closest('.hamburger')) {
+        setIsMenuOpen(false); // Fecha o menu se clicar fora dele no modo responsivo
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   return (
-    <div className="navbar navbar-dark bg-dark">
-      <div className="container-fluid  align-items-start">
-        <Link href="/" className="navbar-brand">
-          MyApp
-        </Link>
-        <ul className="navbar-nav flex-column w-100">
-          <li className="nav-item">
-            <Link href="/dashboard" className="nav-link">Dashboard</Link>
-          </li>
-          <li className="nav-item">
-            <Link href="/register-client" className="nav-link">Register Client</Link>
-          </li>
-          <li className="nav-item">
-            <Link href="/register-seller" className="nav-link">Register Seller</Link>
-          </li>
-          <li className="nav-item">
-            <Link href="/assign-clients" className="nav-link">Assign Clients</Link>
-          </li>
-        </ul>
+    <div className={`navbar ${isDarkMode ? 'dark' : ''} ${isMenuOpen ? 'open' : 'closed'}`}>
+      <div className="navbar-brand">
+        <img src="/vercel.svg" alt="Logo" />
+        <button className="hamburger" onClick={toggleMenu}>
+          <FaBars />
+        </button>
+      </div>
+      <ul className={`navbar-nav flex-column w-100 ${isMenuOpen ? 'show' : ''}`}>
+        <li className="nav-item">
+          <Link href="/dashboard" className={`nav-link ${pathname === '/dashboard' ? 'active' : ''}`}>
+            <FaTachometerAlt className="icon" /> Dashboard
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/register-client" className={`nav-link ${pathname === '/register-client' ? 'active' : ''}`}>
+            <FaUser className="icon" /> Registrar Cliente
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/register-seller" className={`nav-link ${pathname === '/register-seller' ? 'active' : ''}`}>
+            <FaClipboardList className="icon" /> Registar Vendedor
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/assign-clients" className={`nav-link ${pathname === '/assign-clients' ? 'active' : ''}`}>
+            <FaClipboardList className="icon" /> Atribuir clientes
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/notifications" className={`nav-link ${pathname === '/notifications' ? 'active' : ''}`}>
+            <FaBell className="icon" /> Notificações
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/likes" className={`nav-link ${pathname === '/likes' ? 'active' : ''}`}>
+            <FaHeart className="icon" /> Likes
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link href="/wallets" className={`nav-link ${pathname === '/wallets' ? 'active' : ''}`}>
+            <FaWallet className="icon" /> Wallets
+          </Link>
+        </li>
+      </ul>
+      <div className="dark-mode-toggle">
+        <span>Dark Mode</span>
+        <button onClick={toggleDarkMode}>
+          {isDarkMode ? <FaSun /> : <FaMoon />}
+        </button>
       </div>
     </div>
   );

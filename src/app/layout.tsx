@@ -1,3 +1,5 @@
+/* src/app/layout.tsx */
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -23,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="d-flex">
           <Navbar />
-          <main className="flex-grow-1 p-4 main-content">{children}</main>
+          <main className="main-content flex-grow-1 p-4">{children}</main>
         </div>
       </body>
     </html>
