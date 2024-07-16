@@ -35,25 +35,6 @@ const Navbar = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (!target.closest('.navbar') && !target.closest('.hamburger')) {
-        setIsMenuOpen(false); // Fecha o menu se clicar fora dele no modo responsivo
-      }
-    };
-
-    if (isMenuOpen) {
-      document.addEventListener('click', handleClickOutside);
-    } else {
-      document.removeEventListener('click', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isMenuOpen]);
-
   return (
     <div className={`navbar ${isDarkMode ? 'dark' : ''} ${isMenuOpen ? 'open' : 'closed'}`}>
       <div className="navbar-brand">
@@ -75,12 +56,12 @@ const Navbar = () => {
         </li>
         <li className="nav-item">
           <Link href="/register-seller" className={`nav-link ${pathname === '/register-seller' ? 'active' : ''}`}>
-            <FaClipboardList className="icon" /> Registar Vendedor
+            <FaClipboardList className="icon" /> Registrar Vendedor
           </Link>
         </li>
         <li className="nav-item">
           <Link href="/assign-clients" className={`nav-link ${pathname === '/assign-clients' ? 'active' : ''}`}>
-            <FaClipboardList className="icon" /> Atribuir clientes
+            <FaClipboardList className="icon" /> Atribuir Clientes
           </Link>
         </li>
         <li className="nav-item">

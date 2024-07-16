@@ -7,12 +7,6 @@
 @import url('bootstrap/dist/css/bootstrap.min.css');
 @import '@fontsource/roboto';
 
-.main-content {
-  margin-left: 220px; /* Espaço suficiente para a navbar */
-  padding: 20px;
-  flex-grow: 1;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -21,6 +15,13 @@ body {
 
 html, body, #__next {
   height: 100%;
+}
+
+.main-content {
+  margin-left: 220px; /* Espaço suficiente para a navbar */
+  padding: 20px;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease-in-out;
 }
 
 .d-flex {
@@ -80,18 +81,6 @@ html, body, #__next {
   font-size: 1.5em;
 }
 
-.search-bar {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.search-bar input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-}
-
 .nav-item {
   width: 100%;
 }
@@ -136,9 +125,9 @@ html, body, #__next {
 
 @media (max-width: 768px) {
   .navbar {
-    transform: translateX(-100%);
-    width: 100%;
+    width: 220px;
     position: fixed;
+    transform: translateX(-100%);
   }
 
   .navbar.open {
@@ -151,5 +140,15 @@ html, body, #__next {
 
   .hamburger {
     display: block;
+  }
+
+  .navbar-brand {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navbar-nav.show {
+    display: flex;
+    flex-direction: column;
   }
 }

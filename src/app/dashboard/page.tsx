@@ -2,6 +2,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ClientRegistrationsChart from '../components/ClientRegistrationsChart';
+import SellerRegistrationsChart from '../components/SellerRegistrationsChart';
 
 export default function Dashboard() {
   const [clientCount, setClientCount] = useState<number | null>(null);
@@ -33,7 +35,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className=" container mt-5">
+    <div className="container mt-5">
       <h1 className="mb-4">Dashboard</h1>
       <div className="row">
         <div className="col-md-6">
@@ -51,6 +53,16 @@ export default function Dashboard() {
               <p className="card-text">{sellerCount !== null ? sellerCount : 'Carregando...'}</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row mt-4">
+        <div className="col-md-6">
+          <h5>Client Registrations by Day</h5>
+          <ClientRegistrationsChart />
+        </div>
+        <div className="col-md-6">
+          <h5>Seller Registrations by Day</h5>
+          <SellerRegistrationsChart />
         </div>
       </div>
     </div>
