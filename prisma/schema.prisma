@@ -12,7 +12,29 @@ model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String?
+  password  String?
   createdAt DateTime @default(now())
+  role      Role     @default(USER)
+  org       Org?     @relation(fields: [orgId], references: [id])
+  orgId     Int?
+
+  @@map("users")
+}
+
+model Org {
+  id          Int      @id @default(autoincrement())
+  name        String
+  createdAt   DateTime @default(now())
+  ownerId     Int      @unique
+  owner       User     @relation(fields: [ownerId])
+
+  @@map("orgs")
+}
+
+enum Role {
+  USER
+  ADMIN
+  SELLER
 }
 
 model Client {
@@ -22,7 +44,6 @@ model Client {
   phone     String
   createdAt DateTime      @default(now())
   sellers   ClientSeller[]
-
 }
 
 model Seller {
@@ -32,7 +53,6 @@ model Seller {
   phone     String
   createdAt DateTime      @default(now())
   clients   ClientSeller[]
-
 }
 
 model ClientSeller {
