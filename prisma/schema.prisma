@@ -13,6 +13,8 @@ model User {
   email     String   @unique
   name      String?
   createdAt DateTime @default(now())
+  password  String
+  role      String   @default("user")
 }
 
 model Client {
@@ -22,7 +24,6 @@ model Client {
   phone     String
   createdAt DateTime      @default(now())
   sellers   ClientSeller[]
-
 }
 
 model Seller {
@@ -32,7 +33,6 @@ model Seller {
   phone     String
   createdAt DateTime      @default(now())
   clients   ClientSeller[]
-
 }
 
 model ClientSeller {
